@@ -1,0 +1,13 @@
+.timer {
+    float: right;
+    text-align: right;
+}
+
+.highscore {
+    float: left;
+}
+
+div {
+    height: 100%;
+    margin: 0px;
+}
