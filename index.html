@@ -6,15 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js"></script>
 </head>
 <body>
     <header>
-        <div style="clear:both;">
-            <p class="highscore">
-                <a href="">View Highscores</a>
-            </p>
-            <p class="timer">Time</p>
-        </div>
+        <h1>JavaScript Quiz</h1>
+        <span>
+            Welcome to the JavaScript quiz. This quiz is 10 questions long, and
+            has a 75 second time limit. A wrong answer will result in a time deduction.
+            Your final score will be the amount of time you hvae remaining at the end
+            of the quiz. After finsihing the quiz you will be able to record and save your
+            highscore. Good Luck!
+        </span>
     </header>
+    <div>
+        <button>Start Quiz!</button>
+        <div>Time remaining: <span id="timer"></span></div>
+
+    <article class = "quiz-content" id = "quiz-content">
+        <ul class = "quiz-questions" id = "quiz-questions">
+            <li class = "quiz-answers" id = "quiz-answers"></li>
+        </ul>
+    </article>
+    </div>
 </body>
 </html>
