@@ -1,16 +1,16 @@
-var quizContainer = document.getElementById('quiz-content');
-var resultsContainer = document.getElementById('quiz-answers');
-var submitButton = document.getElementById('timer'); 
+var quizContainer = document.getElementById('quiz');
+var resultsContainer = document.getElementById('results');
+var submitButton = document.getElementById('submit'); 
+var timerButton = document.getElementById('start');
 
-var buttonEl = document.querySelector("#timer"); 
+// var buttonEl = document.querySelector("#timer"); 
 
-var pageContentEl = document.querySelector("#page-content"); 
-var quizContentEl = document.querySelector("#quiz-content");
-var quizQuestionsEl = document. querySelector("#quiz-questions"); 
-var quizAnswersEl = document.querySelector("#quiz-answers");
-var buttonEl = document.querySelector("#timer"); 
+// var pageContentEl = document.querySelector("#page-content"); 
+// var quizContentEl = document.querySelector("#quiz-content");
+// var quizQuestionsEl = document. querySelector("#quiz-questions"); 
+// var quizAnswersEl = document.querySelector("#quiz-answers");
 
-var questionArr = [
+var qquizQuestions = [
     // question 1 
     {
         question: "Where can JavaScript be inserted in an HTML document?",
@@ -128,54 +128,98 @@ var questionArr = [
 ]
 
 //countdown timer 
-var count = 75; 
-var counter = setInterval(timer, 1000); //will run every second
-function timer () {
-    count=count-1; 
-    if (count <= 0) {
-        clearInterval(counter); 
-        //counter ended - end quiz 
-        return; 
-    }
 
-    document.getElementById("timer").innerHTML=count; 
+function startTimer() {
+    var counter = 75; 
+    setInterval (function () {
+        counter--; 
+        if (counter >= 0){
+            span = document.getElementById("timer");
+            span.innerHTML = counter; 
+        }
+        if (counter === 0) {
+            alert("Sorry, you've run out of time.");
+            clearInterval(counter);
+        }
+    }, 1000); 
 }
 
-var quizContentEl = function () {
+function start() 
+{
+    document.getElementById("timer"); 
+    startTimer(); 
+}
+
+// var count = 75; 
+// var counter = setInterval(timer, 1000); //will run every second
+// function timer () {
+//     count=count-1; 
+//     if (count <= 0) {
+//         clearInterval(counter); 
+//         //counter ended - end quiz 
+//         return; 
+//     }
+
+//     document.getElementById("timer").innerHTML=count; 
+
+// }
+
+
+var buildQuiz = function () {
     var output = []; 
     //for each question 
-    questionArr.forEach(
+    quizQuestions.forEach(
         (currentQuestion, questionNumber) => {
             //list of possible answers 
             var answers = [];
             for(letter in currentQuestion.answers) {
                 answers.push(
-                    `<label> <input type="radio" name="question${questionNumber}" value="${letter}"> ${letter} : ${currentQuestion.answers[letter]} </label>`);
+                    `<label> <input type="radio" name="question${questionNumber}" value="${letter}">
+                    ${letter} : ${currentQuestion.answers[letter]} </label>`);
             }
             // add this question and its answers to the output
             output.push(
-                `<div class="question"> ${currentQuestion.question} </div> <div class="answers"> ${answers.join('')} </div>`
+                `<div class="question"> ${currentQuestion.question} </div> 
+                <div class="answers"> ${answers.join('')} </div>`
             );
         }
     );
-    //combine our output list into one string of HTML and put it on the page 
+    //combine the output list into one string of HTML and put it on the page 
     quizContainer.innerHTML = output.join(''); 
 };
 
-var quizQuestionEl = function () { 
-    var quizQuestion = document.createElement("ul");
-    quizQuestion.className = "quiz-questions";
+function showResults(){
+    // get answers from quiz 
+    var answerContainers = quizContainer.querySelectorAll('.answers');
+    // keep track of user's answers 
+    let numCorrect = 0; 
+    //for each question 
+    quizQuestions.forEach( (currentQuestion, questionNumber) => {
+        //find answers 
+        var answerContainer = answerContainers[questionNumber];
+        var selector = 'input[name=question${questionNumber}]: checked';
+        var userAnswer = (answerContainer.querySelector(selector) || {}).value; 
 
-    var quizAnswers = document.createElement("li");
-    quizAnswers.innerHTML = 
-    "<li class='quiz-answers'>" + answerOneA + "</li>"; 
-    quizQuestion.appendChild(quizAnswers);
-
-}
-var quizAnswerEl = function () {
-
-};
+        //if answer is correct 
+        if(userAnswer === currentQuestion.correctAnswer){
+            //add to the number of correct answers 
+            numCorrect++; 
+            //color the answers bright orange 
+            answerContainers[questionNumber].style.color = 'orange';
+        }   
+        //if answer is wrong/ not chosen 
+        else {
+            //color the answers grey 
+            answerContainers[questionNumber].style.color = 'grey';
+        }
+    });
+    //show number of correct answers out of total 
+    resultsContainer.innerHTML= '${numCorrect} out of ${myQuestions.length}';
 
 //start timer/ quiz 
-// buttonEl.addEventListener("click", timer()); 
-// submitButton.addEventListener("click", showResults());
+submitButton.addEventListener("click", showResults());
+
+//document.getElementById("timer").addEventListener("click", buildQuiz());
+submitButton.addEventListener('click', showResults);
+timerButton.addEventListener('click', buildQuiz);
+buildQuiz();
