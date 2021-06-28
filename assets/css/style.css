@@ -343,5 +343,5 @@ footer button.show{
 }
 .buttons button.save:hover{
     color:#fff; 
-    background: var(--yellow)
+    background: var(--light-blue)
 }
