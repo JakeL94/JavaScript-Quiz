@@ -1,225 +1,310 @@
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit'); 
-var timerButton = document.getElementById('start');
-
-// var buttonEl = document.querySelector("#timer"); 
-
-// var pageContentEl = document.querySelector("#page-content"); 
-// var quizContentEl = document.querySelector("#quiz-content");
-// var quizQuestionsEl = document. querySelector("#quiz-questions"); 
-// var quizAnswersEl = document.querySelector("#quiz-answers");
-
-var qquizQuestions = [
-    // question 1 
+//quiz questions 
+var questions = [
     {
+        numb: 1,
         question: "Where can JavaScript be inserted in an HTML document?",
-        answers: {
-            a: "The <head> tag.",
-            b: "The <body> tag.",
-            c: "An external script sheet.",
-            d: "All of the above."
-        },
-        correctAnswer: "d",
-        notation: "All of the above is the correct answer. Although the <script> tag can be placed in the <head> or within the <body> of the HTML document, it is best to link an external sheet." 
+        answer: "D. All of the above.",
+        options: [
+            "A. The '< head >' tag.",
+            "B. The '< body >' tag.",
+            "C. An external script sheet.",
+            "D. All of the above."
+        ]
     },
-    // question 2 
     {
-        question: "Does JavaScipt account for white spaces in code?",
-        answers: {
-            a:"Yes, JavaScipt acknowledges all white space in code and it can effect the outcome of your function.",
-            b:"No, JavaScript is lazy and doens't acknowledge anything it doesn't have to."
-        },
-        correctAnswer: "b",
-        notation: "No is the correct answer. Javascript does not acknowledge white space in code. White spaces are used to make code more readable to the human user."
+        numb: 2, 
+        question: "How do you define a variable in JavaScript?",
+        answer: "D. All of the above.",
+        options: [
+            "A. Use 'var' ",
+            "B. Use 'let' ",
+            "C. Use 'const' ",
+            "D. All of the above."
+        ]
     },
-    // question 3 
     {
-        question: "How to you write comments in JavaScript. ie. Lines that JavaScript does not read and execute.", 
-        answers: {
-            a: "<!-- comment here --!>",
-            b: "// comment here ",
-            c: "/* comment here */ ",
-        },
-        correctAnswer: "b", 
-        notation: "The correct answer is b. A is for HTML comments, C is for CSS comments."
+        numb: 3, 
+        question: "How do you write comments in JavaScript?", 
+        answer: "B. // comment here ",
+        options: [
+            "A. < ! - - comment here - - ! >",
+            "B. // comment here ",
+            "C. /* comment here */ ",
+            "D. *** comment here ***"
+        ]
     },
-    // question 4
     {
-        question: "Will the two following statements be read by JavaScript in the same way? ie. 'lastName=Jones' OR 'lastname=Jones'.",
-        answers: {
-            a: "Yes, JavaScript is not case sensitive and will read these two lines of code as the same thing.",
-            b: "No, JavaScript is case sensitive and will read these two lines of code as different from eachother."
-        },
-        correctAnswer: "b",
-        notation: "JavaScript is case sensitive and reads upper and lower case as different characters. It is common to use Camel Case in JavaScript (word starts with a lower case letter and all subsequent first letters are capitalized.)"
+        numb: 4, 
+        question: "Which of the below is NOT an operator?",
+        answer: "C. '//' ",
+        options: [
+            "A. '||' ",
+            "B. '&&' ",
+            "C. '//' ",
+            "D. '!==' "
+        ]
     },
-    // question 5
     {
+        numb: 5, 
         question: "Which of the below statements about JavaScript functions is true?",
-        answers: {
-            a: "A JavaScript function is a block of code designed to perform a particular task.",
-            b: "A JavaScript function does not have to be called to execute.",
-            c: "A JavaScript function can only be used once."
-        },
-        correctAnswer: "a", 
-        notation: "A JavaScipt function is a code designed to perform a task. It has to be called in the JavaScript document, and it can be reused as many times as necessarry."
+        answer: "A. A JavaScript function is a block of code designed to perform a particular task.",
+        options: [
+            "A. A JavaScript function is a block of code designed to perform a particular task.",
+            "B. A JavaScript function does not have to be called to execute.",
+            "C. A JavaScript function can only be used once.",
+            "D. A JavaScript function has to be defined in the global scope."
+        ]
     },
-    // question 6
     {
+        numb: 6, 
         question: "What is a JavaScript string?", 
-        answers: {
-            a: "Used for storing and manipulating text.",
-            b: "A string is written inside quotes.",
-            c: "Numbers inside a string will be read as numbers",
-            d: "A and B",
-            e: "B and C"
-
-        },
-        correctAnswer: "d", 
-        notation: "A JavaScript string is a line of characters written inside quotes. Any numbers written within a string will be returned as a string, not a number."
+        answer: "D. A and B.",
+        options: [
+            "A. Used for storing and manipulating text.",
+            "B. A string is written inside quotes.",
+            "C. Numbers inside a string will be read as numbers.",
+            "D. A and B.",
+        ]
     },
-    // question 7
     {
+        numb: 7, 
         question: "JavaScript 'for loops' can execute a block of code multiple times. When would be a good time to use a for loop?", 
-        answers: {
-            a: "To execute a code when a specific set of parameters returns as true or false.",
-            b: "When you need to loop through an array a set number of times.",
-            c: "All of the above."
-
-        },
-        correctAnswer: "c",
-        notation: "A for loop in JavaScript should be used when the coder wants a function to execute when a boolean value (true or false) is met, and they only want the function to repeat a set number of times." 
+        answer: "C. A and B.", 
+        options: [
+            "A. To execute a code when a specific set of parameters returns as true or false.",
+            "B. When you need to loop through an array a set number of times.",
+            "C. A and B.",
+            "D. It is never a good time to use a for loop."
+        ]
     },
-    // question 8 
     {
+        numb: 8, 
         question: "How would you check a JavaScript code for errors?", 
-        answers: {
-            a: "Use 'debugger;' before and after the code you are trying to troubleshoot.", 
-            b: "Edit your code and refresh the page to try and determine where the error is coming from." 
-        },
-        correctAnswer: "a", 
-        notation: "While both answers are technically true, you should use the 'debgugger;' tool to determine any errors in your code. The other option would take to long to pinpoint the error."
-    }, 
-    // question 9 
-    {
-        question: "How do you download JavaScript?",
-        answers: {
-            a: "You don't, JavaScript is already running for free in all browsers.",
-            b: "JavaScript can be downloaded for $9.99 at 'javascriptdownload.org' and only works on Google Chrome."
-        },
-        correctAnswer: "a",
-        notation: "JavaScript is the programming language of the web. It is already running on all browsers and is free for anyone and everyone to use."
+        answer: "B. 'debugger;' ", 
+        options: [
+            "A. 'fix.me()' ",
+            "B. 'debugger;' ",
+            "C. 'issue.alert' ",
+            "D. None of the above."
+        ]
     },
-    // question 10
     {
+        numb: 9, 
+        question: "What code in JavaScript would create a pop up with the message 'Hi there!'?",
+        answer: "A. window.alert('Hi there!'); ",
+        options: [
+            "A. window.alert('Hi there!'); ",
+            "B. window.confirm('Hi there!'); ",
+            "C. window.prompt(Hi there!);",
+            "D. alert(Hi there!);"
+        ]
+    },
+    {
+        numb: 10, 
         question: "What is the best way to learn JavaScript?",
-        answers: {
-            a: "Use Google.",
-            b: "Practice.",
-            c: "Study with others learning JavaScript.",
-            d: "Take a computer coding bootcamp!",
-            e: "All of the above."
-
-        },
-        correctAnswer: "e",
-        notation: "While everyone is different, most computer coders (both advanced and beginner) agree that using resources such as Google and practicing is the best way to learn all kinds of code."
+        answer: "D. All of the above.",
+        options: [
+            "A. Use Google.",
+            "B. Practice.",
+            "C. Study with others learning JavaScript.",
+            "D. All of the above."
+        ]
     }
-]
+];
 
-//countdown timer 
+//query selectors 
+var startButton = document.querySelector(".startButton button");
+var infoBox = document.querySelector(".infoBox ");
+var exitButton = infoBox .querySelector(".buttons .quit");
+var continueButton = infoBox .querySelector(".buttons .restart");
+var quizBox = document.querySelector(".quizBox");
+var resultBox = document.querySelector(".resultBox");
+var highScoreBox = document.querySelector(".highScoreBox");
+var optionList = document.querySelector(".optionList");
+var timeText = document.querySelector(".timer .timeLeftText");
+var timeCount = document.querySelector(".timer .timerSec");
 
-function startTimer() {
-    var counter = 75; 
-    setInterval (function () {
-        counter--; 
-        if (counter >= 0){
-            span = document.getElementById("timer");
-            span.innerHTML = counter; 
-        }
-        if (counter === 0) {
-            alert("Sorry, you've run out of time.");
-            clearInterval(counter);
-        }
-    }, 1000); 
+
+
+// start button clicked
+startButton.onclick = ()=>{
+    infoBox.classList.add("activeInfo"); //show info/welcome box
+    console.log("start button was clicked")
 }
 
-function start() 
-{
-    document.getElementById("timer"); 
-    startTimer(); 
+
+// exit button clicked
+exitButton.onclick = ()=>{
+    infoBox.classList.remove("activeInfo"); //hide info/welcome box
 }
 
-// var count = 75; 
-// var counter = setInterval(timer, 1000); //will run every second
-// function timer () {
-//     count=count-1; 
-//     if (count <= 0) {
-//         clearInterval(counter); 
-//         //counter ended - end quiz 
-//         return; 
-//     }
+// continue button clicked
+continueButton.onclick = ()=>{
+    infoBox.classList.remove("activeInfo");
+    quizBox.classList.add("activeQuiz"); //show quiz box
+    showQuestions(0); 
+    queCounter(1); //adding 1 to question counter 
+    startTimer(12); //start timer 
+}
 
-//     document.getElementById("timer").innerHTML=count; 
+let timeValue =  12; //12 seconds per question  
+let queCount = 0; //start question count at 0 
+let queNumb = 1; //start question number at 1 (due to 0 index)
+let userScore = 0; //start user score at 0 
+let counter;
 
-// }
+var restartQuiz = resultBox.querySelector(".buttons .restart");
+var quitQuiz = resultBox.querySelector(".buttons .quit");
+var saveScore = resultBox.querySelector(".buttons .save");
 
+// restart button clicked
+restartQuiz.onclick = ()=>{
+    quizBox.classList.add("activeQuiz"); //show quiz box
+    resultBox.classList.remove("activeResult"); //hide result/welcome box
+    timeValue = 12; 
+    queCount = 0;
+    queNumb = 1;
+    userScore = 0;
+    showQuestions(queCount); 
+    queCounter(queNumb); //add question number to the counter 
+    clearInterval(counter);
+    startTimer(timeValue); //start timer 
+    nextButton.classList.remove("show"); //hide the next button
+}
 
-var buildQuiz = function () {
-    var output = []; 
-    //for each question 
-    quizQuestions.forEach(
-        (currentQuestion, questionNumber) => {
-            //list of possible answers 
-            var answers = [];
-            for(letter in currentQuestion.answers) {
-                answers.push(
-                    `<label> <input type="radio" name="question${questionNumber}" value="${letter}">
-                    ${letter} : ${currentQuestion.answers[letter]} </label>`);
+// quit button clicked
+quitQuiz.onclick = ()=>{
+    alert("Fine, bye!");
+    window.location.reload(); //reload main window
+}
+
+var nextButton = document.querySelector("footer .nextButton");
+var footerResults = document.querySelector("footer .totalQue");
+
+// next button clicked
+nextButton.onclick = ()=>{
+    if(queCount < questions.length - 1){ //if question count is less than total question length
+        queCount++; //add one to question count 
+        queNumb++; //add one to question number 
+        showQuestions(queCount); 
+        queCounter(queNumb); 
+        clearInterval(counter); 
+        startTimer(timeValue); 
+        nextButton.classList.remove("show"); //hide the next button
+    }else{
+        clearInterval(counter); 
+        showResult(); //show results box 
+    }
+}
+
+// getting questions and options from array
+function showQuestions(index){
+    var queText = document.querySelector(".queText");
+
+    //creating a new span and div tag for question and options -use array index 
+    let queTag = '<span>'+ questions[index].numb + ". " + questions[index].question +'</span>';
+    let optionTag = '<div class="option"><span>'+ questions[index].options[0] +'</span></div>'
+    + '<div class="option"><span>'+ questions[index].options[1] +'</span></div>'
+    + '<div class="option"><span>'+ questions[index].options[2] +'</span></div>'
+    + '<div class="option"><span>'+ questions[index].options[3] +'</span></div>';
+    queText.innerHTML = queTag; //adding new span tag inside queTag
+    optionList.innerHTML = optionTag; //adding new div tag inside optionTag
+    
+    var option = optionList.querySelectorAll(".option");
+
+    // set onclick event to all question options 
+    for(i=0; i < option.length; i++){
+        option[i].setAttribute("onclick", "optionSelected(this)");
+    }
+}
+
+//clicked an option 
+function optionSelected(answer){
+    clearInterval(counter); //clear counter
+    let userAns = answer.textContent; //answer user chose 
+    let correcAns = questions[queCount].answer; //correct answer in array 
+    var allOptions = optionList.children.length; //answer options 
+    
+    if(userAns == correcAns){ //selected option === correct answer 
+        userScore += 1; //add 1 to score 
+        answer.classList.add("correct"); //make correct option chosen green 
+    }else{
+        answer.classList.add("incorrect"); //incorrect option red 
+
+        for(i=0; i < allOptions; i++){
+            if(optionList.children[i].textContent == correcAns){ 
+                optionList.children[i].setAttribute("class", "option correct"); //make correct option chosen green 
             }
-            // add this question and its answers to the output
-            output.push(
-                `<div class="question"> ${currentQuestion.question} </div> 
-                <div class="answers"> ${answers.join('')} </div>`
-            );
         }
-    );
-    //combine the output list into one string of HTML and put it on the page 
-    quizContainer.innerHTML = output.join(''); 
+    }
+    for(i=0; i < allOptions; i++){
+        optionList.children[i].classList.add("disabled"); //no clicking when option is chosen 
+    }
+    nextButton.classList.add("show"); //show the next button if any option was chosen 
+}
+
+function showResult(){
+    infoBox.classList.remove("activeInfo"); //hide info box
+    quizBox.classList.remove("activeQuiz"); //hide quiz box
+    resultBox.classList.add("activeResult"); //show result box
+    var scoreText = resultBox.querySelector(".scoreText");
+    if (userScore > 7){ // scored more than 7
+        let scoreTag = '<span>Woohoo! 🤑, You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
+        scoreText.innerHTML = scoreTag;  //adding new span tag inside scoreText
+    }
+    else if(userScore > 5){ // if user scored more than 5
+        let scoreTag = '<span>Pretty good! 🧐, You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else{ // if user scored less than 5
+        let scoreTag = '<span>Hmmm... 😐, You got only <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
+        scoreText.innerHTML = scoreTag;
+    }
+}
+
+function startTimer(time){
+    counter = setInterval(timer, 1000);
+    function timer(){
+        timeCount.textContent = time; //changing the value of timeCount with time value
+        time--; //time goes down by 1 second 
+        if(time < 0){ //if timer is less than 0
+            clearInterval(counter); //clear counter
+            var allOptions = optionList.children.length; //getting all option items
+            let correcAns = questions[queCount].answer; //getting correct answer from array
+            for(i=0; i < allOptions; i++){
+                if(optionList.children[i].textContent == correcAns){ 
+                    optionList.children[i].setAttribute("class", "option correct"); 
+                }
+            }
+            for(i=0; i < allOptions; i++){
+                optionList.children[i].classList.add("disabled"); //no clicking after choosing option 
+            }
+            nextButton.classList.add("show"); //show the next button if user selected any option
+        }
+    }
+}
+
+function queCounter(index){
+    //creating a new span tag and passing the question number and total question
+    let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
+    footerResults.innerHTML = totalQueCounTag;  //adding new span tag inside footerResults
+}
+
+// if Save High Score button clicked
+saveScore.onclick = ()=>{
+    var nameText = document.querySelector(".nameText");
+    var scoreText = document.querySelector(".scoreTextFinal");
+    resultBox.classList.remove("activeResult"); //hide results box
+    quizBox.classList.remove("activeQuiz"); //hide quiz box 
+    highScoreBox.classList.add("activeScore"); //show highscore box 
+    var userName = prompt("What is your name?");
+    localStorage.name = userName; //store user name 
+    localStorage.score = userScore; //store user score 
+    console.log("The user's name is: " + userName);
+    console.log("The user's score is: " + userScore);
+
+    let userNameText = '<span class="player-name"> Player Name: ' + userName + '</span>';
+    let userScoreText = '<span class="player-score"> Player Score: '+ userScore +'</span>';
+    nameText.innerHTML = userNameText; //adding new span tag inside userNameText
+    scoreText.innerHTML = userScoreText; //adding new span tag inside userScoreText   
 };
-
-function showResults(){
-    // get answers from quiz 
-    var answerContainers = quizContainer.querySelectorAll('.answers');
-    // keep track of user's answers 
-    let numCorrect = 0; 
-    //for each question 
-    quizQuestions.forEach( (currentQuestion, questionNumber) => {
-        //find answers 
-        var answerContainer = answerContainers[questionNumber];
-        var selector = 'input[name=question${questionNumber}]: checked';
-        var userAnswer = (answerContainer.querySelector(selector) || {}).value; 
-
-        //if answer is correct 
-        if(userAnswer === currentQuestion.correctAnswer){
-            //add to the number of correct answers 
-            numCorrect++; 
-            //color the answers bright orange 
-            answerContainers[questionNumber].style.color = 'orange';
-        }   
-        //if answer is wrong/ not chosen 
-        else {
-            //color the answers grey 
-            answerContainers[questionNumber].style.color = 'grey';
-        }
-    });
-    //show number of correct answers out of total 
-    resultsContainer.innerHTML= '${numCorrect} out of ${myQuestions.length}';
-
-//start timer/ quiz 
-submitButton.addEventListener("click", showResults());
-
-//document.getElementById("timer").addEventListener("click", buildQuiz());
-submitButton.addEventListener('click', showResults);
-timerButton.addEventListener('click', buildQuiz);
-buildQuiz();
